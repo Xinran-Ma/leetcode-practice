@@ -16,7 +16,7 @@
     * Space complixity: 1, it's equal to the "i" in the for loop
     */
     for(let i = 0; i <= k; i++) {
-        nums.push(nums.shift());
+        nums.unshift(nums.pop());
     }
     
     
@@ -30,6 +30,32 @@
     k = k % nums.length;
     
     for(let i = 0; i <= k; i++) {
-        nums.push(nums.shift());
+        nums.unshift(nums.pop());
     }
+
+
+    /**
+     * Version 3
+     * If there's a large array, then the method will use splice method to cut the orignial array and attach the cutted part to the array front
+     */
+
+     k = k % nums.length;
+    
+     const arrayTail = nums.slice(nums.length - k)
+     
+     nums.splice(nums.length - k)
+     nums.unshift(...arrayTail)
+
+
+     /**
+      * Version 4
+      * Removed unnecessary variable to save memory
+      */
+
+      k = k % nums.length;
+    
+      if(k) {
+      nums.unshift(...nums.slice(-k))
+      nums.splice( -k )
+      }
 }
